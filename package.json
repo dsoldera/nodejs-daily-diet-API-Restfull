@@ -4,7 +4,10 @@
   "description": "An API Restfull to help users create daily diets",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "tsx watch src/server.ts",
+    "knex": "node --no-warnings tsx ./node_modules/knex/bin/cli.js",
+    "knex:migrate": "knex migrate:make create-tables -x ts",
+    "build": "tsup src --out-dir build"
   },
   "keywords": [],
   "author": "",
@@ -17,10 +20,14 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@eslint/js": "^9.16.0",
     "@types/node": "^22.10.1",
+    "eslint": "^9.16.0",
+    "globals": "^15.13.0",
     "sqlite3": "^5.1.7",
     "tsup": "^8.3.5",
     "tsx": "^4.19.2",
-    "typescript": "^5.7.2"
+    "typescript": "^5.7.2",
+    "typescript-eslint": "^8.17.0"
   }
 }
