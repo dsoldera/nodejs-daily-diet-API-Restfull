@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "tsx watch src/server.ts",
-    "knex": "node --no-warnings tsx ./node_modules/knex/bin/cli.js",
-    "knex:migrate": "knex migrate:make create-tables -x ts",
+    "knex": "node --import tsx ./node_modules/knex/bin/cli.js",
+    "knex:make": "knex migrate:make ... -x ts",
     "build": "tsup src --out-dir build"
   },
   "keywords": [],
