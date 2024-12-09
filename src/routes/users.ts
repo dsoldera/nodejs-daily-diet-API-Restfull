@@ -11,7 +11,7 @@ export async function usersRoutes (app: FastifyInstance) {
     const { id } = createUserIdBodySchema.parse(request.params)
    
     const user = await knex('users')
-      .select('name')
+      .select('name', 'username', 'created_at')
       .where('id', id )
     //console.log('user', user)
 
@@ -21,28 +21,29 @@ export async function usersRoutes (app: FastifyInstance) {
   app.get('/', async (request) => {
    
     const users = await knex('users')
-    console.log('users', users)
+    //console.log('users', users)
 
     return { users }
   })
 
   app.post('/', async (request, reply) => {
-    const timestamp = Date.now();
     const id = randomUUID()
     const createUsersBodySchema = z.object({
       name: z.string(),
+      username: z.string(),
     })
 
-    const { name } = createUsersBodySchema.parse(request.body)
+    const { name, username } = createUsersBodySchema.parse(request.body)
 
     await knex('users').insert({
       id,
       name,
+      username,
       session_id: randomUUID(),
     })
 
     return reply.status(201).send({
-      id, name
+      id, name, username
     })
   })
 }
